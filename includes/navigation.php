@@ -6,18 +6,18 @@
         <a class="navbar-brand" href="#">Start Bootstrap</a>
         <div class="collapse navbar-collapse" id="navbarExample">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+
+                <?php
+                    $query = "SELECT * FROM categories";
+
+                    $select_all_categories_query = mysqli_query($connection, $query);
+
+                    while($row = mysqli_fetch_assoc($select_all_categories_query)) {
+                        $cat_title = $row["cat_title"];
+                        echo "<li><a href='#' class='nav-link'>{$cat_title}</a></li>";
+                    }
+                ?>
+
             </ul>
         </div>
     </div>
