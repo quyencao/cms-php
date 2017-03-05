@@ -61,14 +61,6 @@
                 </div>
                 <div class="col-xs-6">
 
-                    <?php
-
-                        $query = "SELECT * FROM categories";
-
-                        $select_categories = mysqli_query($connection, $query);
-
-                    ?>
-
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -80,6 +72,12 @@
 
                             <?php
 
+                                // Find all categories query
+
+                                $query = "SELECT * FROM categories";
+
+                                $select_categories = mysqli_query($connection, $query);
+
                                 while($row = mysqli_fetch_assoc($select_categories)) {
 
                                     $cat_id = $row["cat_id"];
@@ -88,7 +86,35 @@
                                     echo "<tr>";
                                     echo "<td>{$cat_id}</td>";
                                     echo "<td>{$cat_title}</td>";
+                                    echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
                                     echo "</tr>";
+
+                                }
+
+                            ?>
+
+                            <?php
+
+                                // Delete Category Query
+                                if(isset($_GET["delete"])) {
+
+                                    $delete_cat_id = $_GET["delete"];
+
+                                    if(filter_var($delete_cat_id, FILTER_VALIDATE_INT)) {
+
+                                        $delete_cat_id = filter_var($delete_cat_id, FILTER_SANITIZE_NUMBER_INT);
+
+                                        $query = "DELETE FROM categories WHERE cat_id = {$delete_cat_id}";
+
+                                        $delete_query = mysqli_query($connection, $query);
+
+                                        header("Location: categories.php");
+
+                                    } else {
+
+                                        echo "<div class='alert alert-danger'>Unable to delete category</div>";
+
+                                    }
 
                                 }
 
