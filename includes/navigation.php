@@ -18,6 +18,8 @@
                     }
                 ?>
 
+                <li><a href="admin" class="nav-link">Admin</a></li>
+
             </ul>
         </div>
     </div>
