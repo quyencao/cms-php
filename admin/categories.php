@@ -59,44 +59,14 @@
                         </div>
                     </form>
 
-                    <form action="" method="post">
-                        <label for="cat-title">Edit Category</label>
-
-                        <?php
+                    <?php
 
                         if(isset($_GET["update"])) {
-
-                            $update_cat_id = $_GET["update"];
-
-                            if(filter_var($update_cat_id, FILTER_VALIDATE_INT)) {
-
-                                $update_cat_id = filter_var($update_cat_id, FILTER_SANITIZE_NUMBER_INT);
-
-                                $query = "SELECT * FROM categories WHERE cat_id = {$update_cat_id}";
-
-                                $update_category = mysqli_query($connection, $query);
-
-                                while($row = mysqli_fetch_assoc($update_category)) {
-
-                                    $cat_id = $row["cat_id"];
-                                    $cat_title = $row["cat_title"];
-
-                        ?>
-                                    <div class="form-group">
-                                        <input type="text" name="cat-title" class="form-control" id="cat-title" value="<?php echo $cat_title; ?>"/>
-                                    </div>
-
-                        <?php
-                                }
-                            }
-
+                            include "includes/update_category.php";
                         }
 
-                        ?>
-                        <div class="form-group">
-                            <input type="submit" name="submit" value="Update Category" class="btn btn-primary">
-                        </div>
-                    </form>
+                    ?>
+
                 </div>
                 <div class="col-xs-6">
 
@@ -125,8 +95,8 @@
                                     echo "<tr>";
                                     echo "<td>{$cat_id}</td>";
                                     echo "<td>{$cat_title}</td>";
-                                    echo "<td><a href='categories.php?update={$cat_id}'>Update</a></td>";
-                                    echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+                                    echo "<td><a href='categories.php?update={$cat_id}' class='btn btn-info'>Update</a></td>";
+                                    echo "<td><a href='categories.php?delete={$cat_id}' class='btn btn-danger'>Delete</a></td>";
                                     echo "</tr>";
 
                                 }
