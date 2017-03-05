@@ -1,34 +1,10 @@
 <div class="col-md-4">
 
-    <?php
-
-        if(isset($_POST["submit"])) {
-            $search = $_POST["search"];
-
-            $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
-
-            $search_query = mysqli_query($connection, $query);
-
-            if(!$search_query) {
-                die ("QUERY FAILED " . mysqli_error($connection));
-            }
-
-            $count = mysqli_num_rows($search_query);
-
-            if($count == 0) {
-                echo "<h1>NO RESULT</h1>";
-            } else {
-                echo $count;
-            }
-        }
-
-    ?>
-
     <!-- Search Widget -->
     <div class="card my-4">
         <h5 class="card-header">Search</h5>
         <div class="card-block">
-            <form method="post">
+            <form method="post" action="search.php">
                 <div class="input-group">
                     <input name="search" type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
