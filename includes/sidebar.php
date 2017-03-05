@@ -1,15 +1,27 @@
 <div class="col-md-4">
 
+    <?php
+
+        if(isset($_POST["submit"])) {
+            $search = $_POST["search"];
+
+            echo $search;
+        }
+
+    ?>
+
     <!-- Search Widget -->
     <div class="card my-4">
         <h5 class="card-header">Search</h5>
         <div class="card-block">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
-            </div>
+            <form method="post">
+                <div class="input-group">
+                    <input name="search" type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="submit" name="submit">Go!</button>
+                    </span>
+                </div>
+            </form> <!-- End Form -->
         </div>
     </div>
 
