@@ -32,7 +32,7 @@
 
                 <!-- Blog Post -->
                 <div class="card mb-4">
-                    <img class="card-img-top img-fluid" src="http://placehold.it/750x300" alt="Card image cap">
+                    <img class="card-img-top img-fluid" src="images/<?php echo $post_image; ?>" alt="Card image cap">
                     <div class="card-block">
                         <h2 class="card-title"><a href="#"><?php echo $post_title; ?></a></h2>
                         <p class="card-text">
