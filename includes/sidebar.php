@@ -17,21 +17,31 @@
 
     <!-- Categories Widget -->
     <div class="card my-4">
+
         <h5 class="card-header">Categories</h5>
+
+        <?php
+
+            $query = "SELECT * FROM categories";
+
+            $select_categories_sidebar= mysqli_query($connection, $query);
+
+        ?>
+
         <div class="card-block">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <ul class="list-unstyled mb-0">
-                        <li><a href="#">Web Design</a></li>
-                        <li><a href="#">HTML</a></li>
-                        <li><a href="#">Freebies</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">Tutorials</a></li>
+
+                        <?php
+                            while($row = mysqli_fetch_assoc($select_categories_sidebar)) {
+
+                                $cat_title = $row["cat_title"];
+                                echo "<li><a href='#' class='nav-link'>{$cat_title}</a></li>";
+
+                            }
+                        ?>
+
                     </ul>
                 </div>
             </div>
@@ -39,11 +49,6 @@
     </div>
 
     <!-- Side Widget -->
-    <div class="card my-4">
-        <h5 class="card-header">Side Widget</h5>
-        <div class="card-block">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-        </div>
-    </div>
+    <?php include "widget.php"; ?>
 
 </div>
