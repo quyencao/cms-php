@@ -32,4 +32,53 @@
         }
     }
 
+    function findAllCategories() {
+        global $connection;
+
+        $query = "SELECT * FROM categories";
+
+        $select_categories = mysqli_query($connection, $query);
+
+        while($row = mysqli_fetch_assoc($select_categories)) {
+
+            $cat_id = $row["cat_id"];
+            $cat_title = $row["cat_title"];
+
+            echo "<tr>";
+            echo "<td>{$cat_id}</td>";
+            echo "<td>{$cat_title}</td>";
+            echo "<td><a href='categories.php?update={$cat_id}' class='btn btn-info'>Update</a></td>";
+            echo "<td><a href='categories.php?delete={$cat_id}' class='btn btn-danger'>Delete</a></td>";
+            echo "</tr>";
+
+        }
+
+    }
+
+    function deleteCategory() {
+        global $connection;
+
+        if(isset($_GET["delete"])) {
+
+            $delete_cat_id = $_GET["delete"];
+
+            if(filter_var($delete_cat_id, FILTER_VALIDATE_INT)) {
+
+                $delete_cat_id = filter_var($delete_cat_id, FILTER_SANITIZE_NUMBER_INT);
+
+                $query = "DELETE FROM categories WHERE cat_id = {$delete_cat_id}";
+
+                $delete_query = mysqli_query($connection, $query);
+
+                header("Location: categories.php");
+
+            } else {
+
+                echo "<div class='alert alert-danger'>Unable to delete category</div>";
+
+            }
+
+        }
+    }
+
 ?>
