@@ -68,7 +68,7 @@
         <input type="text" class="form-control" name="post_title" id="title" value="<?php echo $post_title; ?>">
     </div>
     <div class="form-group">
-        <label for="post_category_id">Post Category Id</label>
+        <label for="post_category_id">Post Category Title</label>
         <select name="post_category_id" class="form-control">
             <?php
 
