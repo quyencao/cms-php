@@ -20,6 +20,7 @@
                     $select_all_posts_query = mysqli_query($connection, $query);
 
                     while($row = mysqli_fetch_assoc($select_all_posts_query)) {
+                        $post_id = $row["post_id"];
                         $post_title = $row["post_title"];
                         $post_author = $row["post_author"];
                         $post_date = $row["post_date"];
@@ -34,11 +35,11 @@
                 <div class="card mb-4">
                     <img class="card-img-top img-fluid" src="images/<?php echo $post_image; ?>" alt="Card image cap">
                     <div class="card-block">
-                        <h2 class="card-title"><a href="#"><?php echo $post_title; ?></a></h2>
+                        <h2 class="card-title"><a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a></h2>
                         <p class="card-text">
                             <?php echo $post_content; ?>
                         </p>
-                        <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                        <a href="post.php?p_id=<?php echo $post_id; ?>" class="btn btn-primary">Read More &rarr;</a>
                     </div>
                     <div class="card-footer text-muted">
                         Posted on <?php echo $post_date; ?> by <a href="#"><?php echo $post_author; ?></a>
