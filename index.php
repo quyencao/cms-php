@@ -25,7 +25,7 @@
                         $post_author = $row["post_author"];
                         $post_date = $row["post_date"];
                         $post_image = $row["post_image"];
-                        $post_content = $row["post_content"];
+                        $post_content = substr($row["post_content"], 0, 100);
 
                 ?>
 
@@ -37,7 +37,7 @@
                     <div class="card-block">
                         <h2 class="card-title"><a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a></h2>
                         <p class="card-text">
-                            <?php echo $post_content; ?>
+                            <?php echo $post_content; ?>...
                         </p>
                         <a href="post.php?p_id=<?php echo $post_id; ?>" class="btn btn-primary">Read More &rarr;</a>
                     </div>

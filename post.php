@@ -42,7 +42,6 @@
                             <p class="card-text">
                                 <?php echo $post_content; ?>
                             </p>
-                            <a href="#" class="btn btn-primary">Read More &rarr;</a>
                         </div>
                         <div class="card-footer text-muted">
                             Posted on <?php echo $post_date; ?> by <a href="#"><?php echo $post_author; ?></a>
