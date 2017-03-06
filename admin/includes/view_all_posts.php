@@ -42,7 +42,7 @@
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_comment_count}</td>";
         echo "<td>{$post_date}</td>";
-        echo "<td><a href='posts.php?source=edit_post' class='btn btn-warning'>Edit</a></td>";
+        echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}' class='btn btn-warning'>Edit</a></td>";
         echo "<td><a href='posts.php?delete_post={$post_id}' class='btn btn-danger'>Delete</a></td>";
         echo "</tr>";
     }
