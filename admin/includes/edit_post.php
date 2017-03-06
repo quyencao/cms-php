@@ -6,9 +6,9 @@
 
         $query = "SELECT * FROM posts WHERE post_id = {$update_post_id}";
 
-        $update_post = mysqli_query($connection, $query);
+        $select_post = mysqli_query($connection, $query);
 
-        while ($row = mysqli_fetch_assoc($update_post)) {
+        while ($row = mysqli_fetch_assoc($select_post)) {
 
             $post_id = $row["post_id"];
             $post_author = $row["post_author"];
@@ -25,13 +25,47 @@
 
     }
 
+    if(isset($_POST["update_post"])) {
+        $update_post_id = filter_var($_GET["p_id"], FILTER_SANITIZE_NUMBER_INT);
+        $post_author = $_POST["post_author"];
+        $post_title = $_POST["post_title"];
+        $post_category_id = $_POST["post_category_id"];
+        $post_status = $_POST["post_status"];
+        $post_new_image = $_FILES["post_image"]["name"];
+        $post_new_image_tmp = $_FILES["post_image"]["tmp_name"];
+        $post_tags = $_POST["post_tags"];
+        $post_content = $_POST["post_content"];
+
+        if(empty($post_new_image)) {
+            $post_new_image = $post_image;
+        } else {
+            move_uploaded_file($post_new_image_tmp, "images/$post_new_image");
+        }
+
+        $query = "UPDATE posts SET ";
+        $query .= "post_title = '{$post_title}', ";
+        $query .= "post_author = '{$post_author}', ";
+        $query .= "post_category_id = {$post_category_id}, ";
+        $query .= "post_status = '{$post_status}', ";
+        $query .= "post_image = '{$post_new_image}', ";
+        $query .= "post_tags = '{$post_tags}', ";
+        $query .= "post_content = '{$post_content}', ";
+        $query .= "post_date = now() ";
+        $query .= "WHERE post_id = {$update_post_id}";
+
+        $update_post = mysqli_query($connection, $query);
+
+        confirm($update_post);
+
+        header("Location: posts.php");
+    }
 
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input type="text" class="form-control" name="title" id="title" value="<?php echo $post_title; ?>">
+        <input type="text" class="form-control" name="post_title" id="title" value="<?php echo $post_title; ?>">
     </div>
     <div class="form-group">
         <label for="post_category_id">Post Category Id</label>
@@ -64,7 +98,7 @@
     </div>
     <div class="form-group">
         <label for="author">Post Author</label>
-        <input type="text" class="form-control" name="author" id="author"
+        <input type="text" class="form-control" name="post_author" id="author"
             value="<?php echo $post_author; ?>">
     </div>
     <div class="form-group">
