@@ -42,6 +42,7 @@
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_comment_count}</td>";
         echo "<td>{$post_date}</td>";
+        echo "<td><a href='posts.php?delete_post={$post_id}' class='btn btn-danger'>Delete</a></td>";
         echo "</tr>";
     }
 
@@ -49,3 +50,18 @@
 
     </tbody>
 </table>
+
+<?php
+    if(isset($_GET["delete_post"])) {
+
+        $delete_post_id = filter_var($_GET["delete_post"], FILTER_SANITIZE_NUMBER_INT);
+
+        $query = "DELETE FROM posts WHERE post_id = {$delete_post_id}";
+
+        $delete_post = mysqli_query($connection, $query);
+
+        confirm($delete_post);
+
+        header("Location: posts.php");
+    }
+?>
