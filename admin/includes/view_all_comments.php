@@ -63,7 +63,7 @@
         echo "<td><a href='posts.php?source=edit_post&p_id={$comment_id}' class='btn btn-info'>Approve</a></td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$comment_id}' class='btn btn-info'>Unapprove</a></td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$comment_id}' class='btn btn-warning'>Edit</a></td>";
-        echo "<td><a href='posts.php?delete_post={$comment_id}' class='btn btn-danger'>Delete</a></td>";
+        echo "<td><a href='comments.php?delete_comment={$comment_id}' class='btn btn-danger'>Delete</a></td>";
         echo "</tr>";
     }
 
@@ -73,16 +73,16 @@
 </table>
 
 <?php
-//if(isset($_GET["delete_post"])) {
-//
-//    $delete_post_id = filter_var($_GET["delete_post"], FILTER_SANITIZE_NUMBER_INT);
-//
-//    $query = "DELETE FROM posts WHERE post_id = {$delete_post_id}";
-//
-//    $delete_post = mysqli_query($connection, $query);
-//
-//    confirm($delete_post);
-//
-//    header("Location: posts.php");
-//}
-//?>
+if(isset($_GET["delete_comment"])) {
+
+    $delete_comment_id = filter_var($_GET["delete_comment"], FILTER_SANITIZE_NUMBER_INT);
+
+    $query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id}";
+
+    $delete_comment = mysqli_query($connection, $query);
+
+    confirm($delete_comment);
+
+    header("Location: comments.php");
+}
+?>
