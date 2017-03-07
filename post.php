@@ -54,15 +54,34 @@
 
             ?>
 
+            <?php
+
+                if(isset($_POST["create_comment"])) {
+
+                    echo $_POST["comment_author"];
+
+                }
+
+            ?>
+
             <!-- Comments Form -->
             <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-block">
-                    <form>
+                    <form method="post">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label for="author">Author</label>
+                            <input type="text" name="comment_author" id="comment_author" class="form-control"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="comment_email" class="form-control" id="email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <textarea class="form-control" rows="3" name="comment" id="comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>
                 </div>
             </div>
