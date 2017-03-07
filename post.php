@@ -70,6 +70,13 @@
                     $create_comment = mysqli_query($connection, $query);
 
                     confirm($create_comment);
+
+                    // increase post_comment_count in posts table
+                    $query = "UPDATE posts SET post_comment_count = post_comment_count  + 1 WHERE post_id = {$post_id}";
+
+                    $update_post_comment_count = mysqli_query($connection, $query);
+
+                    confirm($update_post_comment_count);
                 }
 
             ?>
