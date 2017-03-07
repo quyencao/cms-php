@@ -1,7 +1,5 @@
 <?php include "includes/db.php"; ?>
 
-<?php include "admin/functions.php"; ?>
-
 <?php include "includes/header.php"; ?>
 
 <!-- Navigation -->
@@ -69,9 +67,9 @@
                     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
                     $query .= " VALUES($post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
 
-                    $insert_comment = mysqli_query($connection, $query);
+                    $create_comment = mysqli_query($connection, $query);
 
-                    confirm($insert_comment);
+                    confirm($create_comment);
                 }
 
             ?>
