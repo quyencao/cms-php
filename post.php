@@ -58,8 +58,18 @@
 
                 if(isset($_POST["create_comment"])) {
 
-                    echo $_POST["comment_author"];
+                    $post_id = $_GET["p_id"];
 
+                    $comment_author = $_POST["comment_author"];
+                    $comment_email = $_POST["comment_email"];
+                    $comment_content = $_POST["comment_content"];
+
+                    $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
+                    $query .= " VALUES($post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
+
+                    $insert_comment = mysqli_query($connection, $query);
+
+                    confirm($insert_comment);
                 }
 
             ?>
@@ -79,7 +89,7 @@
                         </div>
                         <div class="form-group">
                             <label for="comment">Comment</label>
-                            <textarea class="form-control" rows="3" name="comment" id="comment"></textarea>
+                            <textarea class="form-control" rows="3" name="comment_content" id="comment"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>
