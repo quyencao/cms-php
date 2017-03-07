@@ -16,7 +16,7 @@
 
     <?php
 
-    $query = "SELECT * FROM comments";
+    $query = "SELECT * FROM comments ORDER BY comment_id DESC ";
 
     $select_posts = mysqli_query($connection, $query);
 
@@ -26,7 +26,7 @@
         $comment_post_id = $row["comment_post_id"];
         $comment_author = $row["comment_author"];
         $comment_email = $row["comment_email"];
-        $comment_content = $row["comment_content"];
+        $comment_content = substr($row["comment_content"], 0, 50);
         $comment_status = $row["comment_status"];
         $comment_date = $row["comment_date"];
 

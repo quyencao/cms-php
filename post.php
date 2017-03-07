@@ -96,36 +96,36 @@
                 </div>
             </div>
 
-            <!-- Single Comment -->
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
+            <?php
 
-            <!-- Comment with nested comments -->
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                $query = "SELECT * FROM comments WHERE comment_post_id = {$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
 
-                    <div class="media mt-4">
+                $select_comment = mysqli_query($connection, $query);
+
+                confirm($select_comment);
+
+                while($row = mysqli_fetch_assoc($select_comment)) {
+
+                    $comment_date = $row["comment_date"];
+                    $comment_content = $row["comment_content"];
+                    $comment_author = $row["comment_author"];
+                ?>
+
+                    <!-- Single Comment -->
+                    <div class="media mb-4">
                         <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                         <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            <h5 class="mt-0"><?php echo $comment_author; ?> <small><?php echo $comment_date; ?></small></h5>
+                            <?php echo $comment_content; ?>
                         </div>
                     </div>
 
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
+            <?php
 
-                </div>
-            </div>
+                }
+
+            ?>
+
 
         </div>
 
