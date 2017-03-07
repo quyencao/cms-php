@@ -60,9 +60,9 @@
         }
 
         echo "<td>{$comment_date}</td>";
-        echo "<td><a href='posts.php?source=edit_post&p_id={$comment_id}' class='btn btn-info'>Approve</a></td>";
-        echo "<td><a href='posts.php?source=edit_post&p_id={$comment_id}' class='btn btn-info'>Unapprove</a></td>";
-        echo "<td><a href='posts.php?source=edit_post&p_id={$comment_id}' class='btn btn-warning'>Edit</a></td>";
+        echo "<td><a href='comments.php?approved_comment_id={$comment_id}' class='btn btn-info'>Approve</a></td>";
+        echo "<td><a href='comments.php?unapproved_comment_id={$comment_id}' class='btn btn-info'>Unapprove</a></td>";
+        echo "<td><a href='comments.php?source=edit_post&p_id={$comment_id}' class='btn btn-warning'>Edit</a></td>";
         echo "<td><a href='comments.php?delete_comment={$comment_id}' class='btn btn-danger'>Delete</a></td>";
         echo "</tr>";
     }
@@ -73,15 +73,45 @@
 </table>
 
 <?php
-if(isset($_GET["delete_comment"])) {
+    if(isset($_GET["delete_comment"])) {
 
-    $delete_comment_id = filter_var($_GET["delete_comment"], FILTER_SANITIZE_NUMBER_INT);
+        $delete_comment_id = filter_var($_GET["delete_comment"], FILTER_SANITIZE_NUMBER_INT);
 
-    $query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id}";
+        $query = "DELETE FROM comments WHERE comment_id = {$delete_comment_id}";
 
-    $delete_comment = mysqli_query($connection, $query);
+        $delete_comment = mysqli_query($connection, $query);
 
-    confirm($delete_comment);
+        confirm($delete_comment);
+
+        header("Location: comments.php");
+    }
+?>
+
+<?php
+    if(isset($_GET["unapproved_comment_id"])) {
+
+        $unapproved_comment_id = filter_var($_GET["unapproved_comment_id"], FILTER_SANITIZE_NUMBER_INT);
+
+        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$unapproved_comment_id}";
+
+        $update_comment_query = mysqli_query($connection, $query);
+
+        confirm($update_comment_query);
+
+        header("Location: comments.php");
+    }
+?>
+
+<?php
+if(isset($_GET["approved_comment_id"])) {
+
+    $approved_comment_id = filter_var($_GET["approved_comment_id"], FILTER_SANITIZE_NUMBER_INT);
+
+    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$approved_comment_id}";
+
+    $update_comment_query = mysqli_query($connection, $query);
+
+    confirm($update_comment_query);
 
     header("Location: comments.php");
 }
